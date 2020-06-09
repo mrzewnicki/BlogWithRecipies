@@ -1,0 +1,44 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+   <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="${contextPath}/">Cookingbook - Ksiazka kucharska</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+         <sec:authorize access="hasAuthority('admin')">        
+          <li class="nav-item active">
+            <a class="nav-link" href="${contextPath}/stronaAdministratora">Administracja
+              <span class="sr-only">(current)</span>
+            </a>
+		  </li>	
+		 </sec:authorize>
+          <li class="nav-item">
+	 	<a class="nav-link" href="${contextPath}/filters">Filtruj przepisy</a>
+          </li>
+        <c:if test="${pageContext.request.userPrincipal.name != null}"> 
+          <li class="nav-item">
+			<a class="nav-link" href="${contextPath}/dodajPrzepis">Moje przepisy</a>
+		  </li>
+		  <li class="nav-item">
+			<form id="logoutForm" method="POST" action="${contextPath}/logout">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				<a class="nav-link" onclick="document.forms['logoutForm'].submit()">Wyloguj</a>
+			</form>
+          </li>
+        </c:if>
+       <c:if test="${pageContext.request.userPrincipal.name == null}">
+          <li class="nav-item">
+			<a class="nav-link" href="${contextPath}/login">Zaloguj sie </a>
+		  </li>
+		 <li class="nav-item">
+			<a class="nav-link" href="${contextPath}/rejestracja">Zaloz konto</a> 
+          </li>
+        </c:if>
+        </ul>
+      </div>
+    </div>
+  </nav>

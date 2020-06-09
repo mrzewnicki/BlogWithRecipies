@@ -1,0 +1,23 @@
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        	<c:forEach items="${listaPrzepisow}" var="przepis">
+        
+        <div class="card mb-4">
+          <img class="card-img-top" src="getZdjecie/<c:out value='${przepis.getId()}'/>" alt="Brak zdjecia">
+          <div class="card-body">
+            <h2 class="card-title">${przepis.getId()}. ${przepis.getNazwa()}</h2>
+            <p class="card-text">
+            <b>Poziom trudnosci:</b> ${przepis.getPoziomTrudnosci()}<br>
+		        Czas wykonania: ${przepis.getCzasWykonania()}<br>
+		  <a href="${contextPath}/przepis/${przepis.getId()}" class="btn btn-primary">Zobacz przepis</a>
+          </div>
+          <div class="card-footer text-muted">
+            Autor: ${przepis.getUser().getUsername()} | Kategoria: ${przepis.getRodzajPotrawy()}
+          </div>
+        </div>
+        	</c:forEach>							
+        
+       </div>
+     </div>
+   </div>
